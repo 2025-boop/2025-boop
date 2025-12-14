@@ -1,0 +1,17 @@
+[build]
+  # Base directory will be set per-site in Netlify UI
+  # This command runs from the base directory
+  command = """
+    cd ../.. && \
+    corepack enable pnpm && \
+    pnpm install --frozen-lockfile && \
+    pnpm --filter ${APP_NAME}... build
+  """
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PNPM_VERSION = "9"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
