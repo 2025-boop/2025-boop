@@ -10,7 +10,7 @@
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSessionStore } from '../stores/sessionStore';
-import { getSocketClient, resetSocketClient, SocketClient } from '../ws/socket';
+import { getSocketClient, SocketClient } from '../ws/socket';
 import { SessionTracker } from '../tracking/analytics';
 import type { CommandMessage } from '../types/ws';
 
@@ -34,25 +34,28 @@ export function SessionProvider({ children, sessionUuid }: SessionProviderProps)
     } = useSessionStore();
 
     useEffect(() => {
-        // Preserve existing caseId when initializing session UUID
-        const currentCaseId = useSessionStore.getState().caseId;
-        const guestToken = useSessionStore.getState().guestToken;
+        // Read current state from store (preserves existing values)
+        const state = useSessionStore.getState();
+        const currentCaseId = state.caseId;
+        const guestToken = state.guestToken;
 
         console.log('[SessionProvider] Initializing with:', {
             sessionUuid,
             caseId: currentCaseId,
             guestToken: guestToken ? `${guestToken.substring(0, 20)}...` : null,
-            hasToken: !!guestToken
+            hasToken: !!guestToken,
+            storeState: state
         });
 
-        setSession(sessionUuid, currentCaseId || undefined, guestToken || undefined);
+        // Only update sessionUuid, preserve existing caseId and guestToken
+        useSessionStore.setState({ sessionUuid });
 
         // Validate token exists
         if (!guestToken) {
             console.error('[SessionProvider] ⚠️ Missing guest token - WebSocket connection will fail', {
                 sessionUuid,
-                guestToken,
-                storeState: useSessionStore.getState()
+                guestToken: state.guestToken,
+                storeState: state
             });
             return;
         }
