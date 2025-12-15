@@ -271,11 +271,18 @@ declare global {
 
 export function getSocketClient(sessionUuid: string, guestToken?: string): SocketClient {
   if (!socketInstance) {
-    // Priority: Runtime Config -> Build Time Config (fallback) -> Default
+    // Priority: Runtime Config (Docker) -> Build Time Config (Netlify/local)
     const wsUrl =
       (typeof window !== 'undefined' ? window.__ENV?.NEXT_PUBLIC_WS_URL : undefined) ||
-      process.env.NEXT_PUBLIC_WS_URL ||
-      'ws://localhost:8000';
+      process.env.NEXT_PUBLIC_WS_URL;
+
+    // Validate WebSocket URL is provided
+    if (!wsUrl) {
+      console.error('[Socket] CRITICAL: NEXT_PUBLIC_WS_URL not configured!');
+      throw new Error(
+        'WebSocket URL not configured. Please set NEXT_PUBLIC_WS_URL environment variable.'
+      );
+    }
 
     // Construct base URL
     let url = `${wsUrl}/ws/session/${sessionUuid}/`;

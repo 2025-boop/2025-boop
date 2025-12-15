@@ -6,6 +6,33 @@ const nextConfig: NextConfig = {
 
   // Security headers
   async headers() {
+    // Build dynamic connect-src for CSP from environment variables
+    const connectSrcParts = ["'self'"];
+
+    // Get backend domain from env var, with fallbacks
+    const backendDomain = process.env.NEXT_PUBLIC_BACKEND_DOMAIN ||
+                          process.env.NEXT_PUBLIC_WS_URL?.replace(/^wss?:\/\//, '') ||
+                          'localhost:8000';
+
+    // Determine protocols based on domain
+    const isLocalhost = backendDomain.includes('localhost');
+    const httpProtocol = isLocalhost ? 'http' : 'https';
+    const wsProtocol = isLocalhost ? 'ws' : 'wss';
+
+    // Add backend URLs
+    connectSrcParts.push(`${httpProtocol}://${backendDomain}`);
+    connectSrcParts.push(`${wsProtocol}://${backendDomain}`);
+
+    // Always include localhost for local development
+    if (!isLocalhost) {
+      connectSrcParts.push('http://localhost:8000');
+      connectSrcParts.push('ws://localhost:8000');
+      connectSrcParts.push('https://localhost:8000');
+      connectSrcParts.push('wss://localhost:8000');
+    }
+
+    const connectSrc = connectSrcParts.join(' ');
+
     return [
       {
         source: "/:path*",
@@ -19,7 +46,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self' data:",
-              "connect-src 'self' http://localhost:8000 ws://localhost:8000 ws://api.localhost wss://*",
+              `connect-src ${connectSrc}`,
               "frame-src 'self'",
               "object-src 'none'",
               "base-uri 'self'",
