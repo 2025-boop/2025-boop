@@ -1,0 +1,134 @@
+.form-group {
+    margin-bottom: 24px;
+    position: relative;
+    height: var(--input-height);
+    background: transparent;
+    border-bottom: 1px solid var(--color-border-input);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Pseudo-element for the 2px blue focus border */
+.form-group::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    /* Overlap the 1px border */
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-interaction-active);
+    transition: width 0.2s ease-in-out;
+}
+
+.form-group:focus-within::after {
+    width: 100%;
+}
+
+.input-field {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: var(--font-size-input);
+    color: var(--color-text-primary);
+    padding: 0 0 8px 0;
+    z-index: 2;
+}
+
+.input-label {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Floating state: when input is focused or has value (handled via JS or placeholder-shown hack) */
+.input-field:focus+.input-label,
+.input-field:not(:placeholder-shown)+.input-label {
+    top: 4px;
+    /* Move up */
+    font-size: var(--font-size-label-floating);
+    color: var(--color-text-secondary);
+    /* Often stays gray unless error */
+}
+
+.show-hide-btn {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background: none;
+    border: none;
+    color: var(--color-interaction-active);
+    font-size: 0.875rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Custom Checkbox styles */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--color-border-input);
+    border-radius: 4px;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--color-interaction-active);
+    background-color: var(--color-interaction-active);
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.checkbox-group input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.checkbox-label {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    cursor: pointer;
+}
+
+/* Error States */
+.form-group.error {
+    border-bottom-color: #be1324;
+}
+
+.form-group.error::after {
+    background-color: #be1324;
+    width: 100%;
+}
+
+.form-group.error .input-label {
+    color: #be1324;
+}
+
+.error-message {
+    color: #be1324;
+    font-size: 0.75rem;
+    margin-top: 4px;
+}

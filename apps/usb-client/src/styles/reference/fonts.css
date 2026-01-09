@@ -1,0 +1,48 @@
+/* Circular-USB Font Family */
+@font-face {
+    font-family: 'Circular-USB';
+    src: url('/fonts/U.S.BankCircularWeb-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular-USB';
+    src: url('/fonts/U.S.BankCircularWeb-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular-USB';
+    src: url('/fonts/U.S.BankCircularWeb-Book.woff2') format('woff2');
+    font-weight: 450;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular-USB';
+    src: url('/fonts/U.S.BankCircularWeb-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular-USB';
+    src: url('/fonts/U.S.BankCircularWeb-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Circular-USB';
+    src: url('/fonts/U.S.BankCircularWeb-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}

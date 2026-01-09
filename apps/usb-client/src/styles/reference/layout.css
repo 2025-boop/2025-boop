@@ -1,0 +1,342 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    background-color: #0c2074;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.site-header .logo {
+    height: 45px;
+    width: 130px;
+    margin: 6px 0;
+}
+
+/* Hamburger menu - hidden by default on desktop */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+}
+
+.hamburger-menu .line {
+    width: 20px;
+    height: 2px;
+    background-color: white;
+}
+
+.header-links {
+    display: flex;
+    gap: 24px;
+}
+
+.header-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 8px 16px;
+        position: relative;
+    }
+
+    .hamburger-menu {
+        display: flex;
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .header-left {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header-links {
+        display: none;
+    }
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 24px;
+    flex-grow: 1;
+}
+
+/* FDIC Box */
+.fdic-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px 16px;
+    background-color: white;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.fdic-logo {
+    width: 48px;
+    height: auto;
+}
+
+.fdic-text {
+    font-size: 0.875rem;
+    color: #333;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+/* Login Header */
+.login-header h2 {
+    color: #2c2c2c;
+    font-weight: 700;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #b8b8b8;
+    padding: 20px;
+    font-size: 12.8px;
+    color: #333333;
+    line-height: 1.75;
+    font-family: var(--font-family-base);
+}
+
+.footer-container {
+    max-width: 1430px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-secured-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.secure-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 12.8px;
+    color: #333333;
+}
+
+.lock-icon {
+    display: block;
+    float: left;
+    width: 15px;
+    height: 21px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJkAAAAgCAYAAAABmdoHAAACy0lEQVR42u2ZP2gTURjAf4kdggGRIiqiZKhIVJAai0KHKnEKpVYnwWIQ66AI6dBAB2cH4ZYIooj/KChka1qKUDDETgqaoUjqoMNREbyCFOkrJdTq0Kce7SWXtNU2z+8H4e7efXlc7v3uu/e+BDCI7sHiKSCrD8/nkrHCWvoLR9JxoA/oALYDM8A4kFG2la+zrzZgAIgDzcBXIA/cUrb1BoMJGCRYHBgFQrppHujMJWP5VcjVBNwFruimD8AnYC+wX7c9AK4p21qoob+rwB3gM/AMmAL2AReAPcB1ZVv3RLLGEoy1iBaOpDNACpgAet2ZRmekh8AR4LayrT6fvjqAl8AQ0KNsa851bivwFDgLnFS2NS6SNZZgqxItHEnHgLfAe+CEsq1vHjHbgNdAFDimbKtYpb8XwCGgxS3YMtE+AiVlW6dNlCxommCZriiZrqg7LASM6tha6NXbfi/BAHR7/7L4SrQDQ16C6b7mdJZrN/V1GTRJsCopuh7R2oAyMOYTN6bjjvvEhQDHJ8apkolFsg1cRa4QLN7SzHBpmuHSNFuCAa/BHtXfrcZuwPGb0OvzDrAToSpNetBuAuSSsRuugdw0bR5kvZ78d19muX/uMACvpmZYKH/3Ei0L7PK5L4s13r9Fn/ndJb3b6tr3ovVXvLKtJ0ZKZgrObHmzXdJjvT2jP7XEGydZQ64u9SvvuVc2G7p4FICe7ARqZSabBxKVirS6dHFZHz6q4VJ+x3qVMsKR9I96f5uyrYBpkjVkJsslY4XuwWKnT+miUimjUCUmVWHfjxRL/wwIJq0udd2rU8sDQNfBP3PwxIEdXoLlZcglk9UtmjujjUw6jEw6lTKYCCaZbP0ymggmkv0r0UQwkeyviJZgqUDq6FWkCCZzsvVfdeJfaBVEMnMwseb1X78uBZFMEMkEQRAEQRAEQRAEQRAEQRAEQRAEQRA2lJ8qSRwUlHKvHQAAAABJRU5ErkJggg==");
+    background-position: -67px 0;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #235ae4;
+    text-decoration: underline;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.footer-links .separator {
+    color: #666;
+    margin: 0 4px;
+}
+
+.footer-links .cali-icon {
+    display: inline;
+    width: 30px;
+    height: 14px;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.footer-meta {
+    margin-bottom: 8px;
+}
+
+.footer-meta .version {
+    margin: 8px 0;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid #b8b8b8;
+    margin: 16px 0;
+}
+
+/* Disclosures */
+.disclosures-container {
+    margin-bottom: 16px;
+}
+
+.disclosure-header {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #333333;
+}
+
+.disclosure-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.disclosure-list li {
+    display: inline;
+    font-weight: 700;
+}
+
+.disclosure-list li::after {
+    content: " • ";
+    color: #333333;
+}
+
+.disclosure-list li:last-child::after {
+    content: "";
+}
+
+/* Legal Sections */
+.legal-sections {
+    color: #333333;
+}
+
+.legal-section {
+    margin-top: 32px;
+}
+
+.legal-section h3 {
+    font-weight: 700;
+    font-size: 12.8px;
+    margin-bottom: 8px;
+    color: #333333;
+}
+
+.legal-section .content {
+    margin-bottom: 8px;
+}
+
+.legal-section a {
+    color: #235ae4;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.legal-section .ehl-icon {
+    display: inline;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Mobile Footer */
+@media (max-width: 768px) {
+    .footer-secured-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .footer-links .separator {
+        display: none;
+    }
+}
+
+/* ===== GIVE FEEDBACK BUTTON ===== */
+.feedback-btn {
+    position: fixed;
+    bottom: 347px;
+    right: -1px;
+    width: 35px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.feedback-btn span {
+    display: flex;
+    background: #0a41c5;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    writing-mode: vertical-rl;
+    transform: rotateZ(180deg);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.feedback-btn:hover span {
+    background: #0c2074;
+}
+
+/* Mobile Feedback Button - horizontal at bottom */
+@media (max-width: 768px) {
+    .feedback-btn {
+        bottom: 0px;
+        right: 20px;
+        width: auto;
+    }
+
+    .feedback-btn span {
+        writing-mode: horizontal-tb;
+        transform: none;
+        border-radius: 4px 4px 0 0;
+    }
+}

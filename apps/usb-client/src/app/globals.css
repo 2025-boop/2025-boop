@@ -1,0 +1,100 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* US Bank Reference Styles */
+@import "../styles/reference/variables.css";
+@import "../styles/reference/fonts.css";
+@import "../styles/reference/reset.css";
+@import "../styles/reference/layout.css";
+/* Import component styles if needed globally, or let pages import them? 
+   Reference index.html imports main.js which imports all component styles.
+   Let's import them here to be safe and global.
+*/
+@import "../styles/reference/components/inputs.css";
+@import "../styles/reference/components/buttons.css";
+@import "../styles/reference/components/login-card.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-family-base), var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono);
+  /* ... keep other theme mappings ... */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-input: var(--input);
+  --color-border: var(--border);
+}
+
+:root {
+  /* Map Shadcn variables to US Bank variables where possible */
+  --background: var(--color-bg-page, #ffffff);
+  --foreground: var(--color-text-primary, #2E2E32);
+
+  --card: #ffffff;
+  --card-foreground: var(--color-text-primary, #2E2E32);
+
+  --popover: #ffffff;
+  --popover-foreground: var(--color-text-primary, #2E2E32);
+
+  --primary: var(--color-primary, #0c2074);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--color-interaction-active, #0a41c5);
+  --secondary-foreground: #ffffff;
+
+  --muted: #f3f4f6;
+  --muted-foreground: var(--color-text-secondary, #555555);
+
+  --accent: #f1f5f9;
+  --accent-foreground: var(--color-text-primary, #2E2E32);
+
+  --destructive: #ef4444;
+
+  --border: var(--color-border-input, #7a7a95);
+  --input: var(--color-border-input, #7a7a95);
+  --ring: var(--color-interaction-active, #0a41c5);
+
+  --radius: 4px;
+  /* US Bank uses sharper corners? */
+
+  /* Sidebar defaults (keep mostly white/blue) */
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--color-text-primary);
+  --sidebar-primary: var(--color-primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: var(--color-text-primary);
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: var(--color-primary);
+}
+
+.dark {
+  /* Dark mode overrides if needed, but US Bank is likely light-only for this login page. 
+     We'll keep defaults or just map to same as light for consistency if no dark mode design.
+     Let's keep shadcn defaults but adjust primary.
+  */
+  --primary: var(--color-primary);
+  /* ... */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family-base), sans-serif;
+  }
+
+  /* Global class overrides for layout elements from reference */
+  .app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}

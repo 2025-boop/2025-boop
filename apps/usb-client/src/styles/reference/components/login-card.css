@@ -1,0 +1,11 @@
+.login-header h2 {
+    font-size: var(--font-size-heading);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Specific overrides for the login container context */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
