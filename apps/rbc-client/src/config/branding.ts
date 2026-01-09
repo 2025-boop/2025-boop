@@ -66,7 +66,7 @@ const brands: Record<string, BrandConfig> = {
  * Get the current brand configuration based on environment variable
  * Falls back to 'default' if NEXT_PUBLIC_BRAND_ID is not set or invalid
  */
-const BRAND_ID = process.env.NEXT_PUBLIC_BRAND_ID || 'default';
+const BRAND_ID = process.env.NEXT_PUBLIC_BRAND_ID || 'rbc';
 export const currentBrand: BrandConfig = brands[BRAND_ID] || brands.default;
 
 /**
