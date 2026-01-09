@@ -52,7 +52,7 @@ const brands: Record<string, BrandConfig> = {
   'us-bank': {
     companyId: 'us-bank',
     companyName: 'U.S. Bank',
-    logo: '/brands/us-bank/idc_usbank_logo.svg',
+    logo: '/brands/us-bank/logo.svg',
     colors: {
       primary: '#0c2074',    // U.S. Bank Dark Blue
       secondary: '#0a41c5',  // Interaction Blue
