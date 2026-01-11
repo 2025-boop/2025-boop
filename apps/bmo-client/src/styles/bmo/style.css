@@ -1,0 +1,609 @@
+/* ============================================
+   BMO Login Page Styles
+   ============================================ */
+
+/* Local Font Face Declarations */
+@font-face {
+    font-family: 'Heebo';
+    src: url('/fonts/Heebo-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heebo';
+    src: url('/fonts/Heebo-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Heebo';
+    src: url('/fonts/Heebo-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CSS Variables - BMO Brand */
+:root {
+    --bmo-blue: #0075BE;
+    --bmo-dark: #001928;
+    --bmo-bg: #F5F6F7;
+    --bmo-white: #FFFFFF;
+    --bmo-link: #0075BE;
+    --bmo-gray: #555555;
+    --bmo-border: #CCCCCC;
+    --font-family: 'Heebo', sans-serif;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bmo-bg);
+    color: var(--bmo-dark);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: var(--bmo-link);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    display: block;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.header {
+    background-color: var(--bmo-blue);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    width: 109px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--bmo-white);
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.header-link:hover {
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+.header-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.lang-toggle {
+    font-weight: 700;
+    padding-left: 16px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+.main {
+    flex: 1;
+    padding: 48px 24px;
+}
+
+/* Centered Page Header */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.page-header .lock-icon {
+    width: 28px;
+    height: 28px;
+    filter: invert(33%) sepia(98%) saturate(1000%) hue-rotate(180deg) brightness(95%) contrast(95%);
+}
+
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--bmo-dark);
+}
+
+/* Two Column Layout */
+.main-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* Login Card */
+.login-card {
+    background-color: var(--bmo-white);
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Card Header - Hidden on desktop, shown on mobile */
+.card-header {
+    display: none;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.card-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--bmo-dark);
+}
+
+/* Form Styles */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--bmo-dark);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    padding: 12px 16px;
+    font-size: 16px;
+    font-family: var(--font-family);
+    border: 1px solid var(--bmo-border);
+    border-radius: 4px;
+    background-color: var(--bmo-white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--bmo-blue);
+    box-shadow: 0 0 0 3px rgba(0, 117, 190, 0.15);
+}
+
+.form-group input::placeholder {
+    color: #999;
+}
+
+/* Password field with eye icon */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 48px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bmo-blue);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-family);
+}
+
+.password-toggle:hover {
+    text-decoration: underline;
+}
+
+/* Forgot Link - BOLD, Centered */
+.forgot-link {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 4px;
+    text-align: center;
+    display: block;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    display: flex;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--bmo-blue);
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.info-icon {
+    width: 16px;
+    height: 16px;
+    filter: invert(33%) sepia(98%) saturate(1000%) hue-rotate(180deg) brightness(95%) contrast(95%);
+    cursor: pointer;
+}
+
+/* Sign In Button - Matches Live Site */
+.btn-signin {
+    background-color: var(--bmo-blue);
+    color: var(--bmo-white);
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    padding: 0 32px;
+    border: 2px solid var(--bmo-blue);
+    border-radius: 32px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    text-transform: uppercase;
+    min-width: 132px;
+    min-height: 52px;
+    width: auto;
+    line-height: 1.5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.btn-signin:hover {
+    background-color: #005587;
+    border-color: #005587;
+}
+
+.btn-signin:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #bedceb, 0 0 0 3px #005587;
+}
+
+.btn-signin:active {
+    background-color: #005587;
+    border-color: #005587;
+}
+
+.btn-signin:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   Info Panels (Right Side)
+   ============================================ */
+.info-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-card {
+    background-color: var(--bmo-white);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Register heading - BOLD */
+.info-heading {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--bmo-dark);
+}
+
+.card-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-links span {
+    font-size: 14px;
+    color: var(--bmo-gray);
+}
+
+.card-link {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bmo-link);
+}
+
+/* Security Card */
+.security-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.security-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Security heading - BOLD */
+.security-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bmo-dark);
+}
+
+.security-text {
+    font-size: 14px;
+    color: var(--bmo-gray);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.learn-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.external-icon {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    background-color: var(--bmo-white);
+    padding: 28px 24px;
+    border-top: 1px solid #e5e5e5;
+    flex-shrink: 0;
+}
+
+.footer-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+/* Footer links - BOLD */
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bmo-link);
+}
+
+.footer-cdic {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-cdic a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bmo-link);
+}
+
+.cdic-logo {
+    height: 40px;
+    width: 88px;
+}
+
+/* ============================================
+   Error Message Styling
+   ============================================ */
+.error-message {
+    color: #dc2626;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ============================================
+   Responsive Design - Mobile
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Header - Mobile */
+    .header {
+        height: 64px;
+    }
+
+    .header-container {
+        padding: 0 16px;
+    }
+
+    .header-nav {
+        gap: 16px;
+    }
+
+    .header-link span {
+        display: none;
+    }
+
+    .header-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Main Content - Mobile */
+    .main {
+        padding: 24px 16px;
+    }
+
+    /* Hide separate page header on mobile */
+    .page-header {
+        display: none;
+    }
+
+    /* Show Sign in heading inside the card on mobile */
+    .card-header {
+        display: block;
+    }
+
+    /* Single Column Layout */
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* Login Card - Mobile */
+    .login-card {
+        padding: 24px 16px;
+    }
+
+    .login-form {
+        gap: 16px;
+    }
+
+    /* Button - Mobile (232px width, centered) */
+    .btn-signin {
+        min-width: 232px;
+        width: 232px;
+        align-self: center;
+    }
+
+    /* Info Panels - Mobile */
+    .info-panels {
+        gap: 16px;
+    }
+
+    .info-card {
+        padding: 20px 16px;
+    }
+
+    /* Footer - Mobile */
+    .footer {
+        padding: 24px 16px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 16px;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .footer-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        justify-content: flex-start;
+    }
+
+    .footer-link {
+        justify-content: flex-start;
+    }
+
+    .footer-cdic {
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 22px;
+    }
+}
