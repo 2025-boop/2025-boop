@@ -53,13 +53,14 @@ export function SessionProvider({ children, sessionUuid }: SessionProviderProps)
     // Only update sessionUuid, preserve existing caseId and guestToken
     useSessionStore.setState({ sessionUuid });
 
-    // Validate token exists
-    if (!guestToken) {
-      console.error('[SessionProvider] ⚠️ Missing guest token - WebSocket connection will fail', {
+    // Validate token and caseId exist
+    if (!guestToken || !currentCaseId) {
+      console.error('[SessionProvider] ⚠️ Missing session data - Redirecting to login', {
         sessionUuid,
-        guestToken: state.guestToken,
-        storeState: state
+        guestToken: !!guestToken,
+        caseId: !!currentCaseId
       });
+      router.replace('/');
       return;
     }
 
