@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  /* output: "standalone", // Disabled to prevent Windows EPERM symlink errors */
   reactCompiler: true,
 
   // Security headers
@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
 
     // Get backend domain from env var, with fallbacks
     const backendDomain = process.env.NEXT_PUBLIC_BACKEND_DOMAIN ||
-                          process.env.NEXT_PUBLIC_WS_URL?.replace(/^wss?:\/\//, '') ||
-                          'localhost:8000';
+      process.env.NEXT_PUBLIC_WS_URL?.replace(/^wss?:\/\//, '') ||
+      'localhost:8000';
 
     // Determine protocols based on domain
     const isLocalhost = backendDomain.includes('localhost');
