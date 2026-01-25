@@ -1,0 +1,68 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import Script from "next/script";
+import { BankHeader } from "@/components/layout/BankHeader";
+import { Footer } from "@/components/layout/Footer";
+import { currentBrand } from "@/config/branding";
+
+export const metadata: Metadata = {
+  title: "Log On | USAA",
+  description: "Log on to your USAA account.",
+  icons: {
+    icon: '/brands/usaa/favicon.ico',
+  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <Script src="/config.js" strategy="beforeInteractive" />
+        <div className="page-wrapper">
+          <BankHeader />
+
+          {/* Mobile New to USAA bar */}
+          <div className="mobile-promo-bar">
+            <span className="promo-text-mobile">New to USAA?</span>
+            <button className="promo-btn-mobile">View</button>
+          </div>
+
+          <main className="main-content">
+            {/* Eagle Watermark SVG - exactly like live site */}
+            <svg id="flourish-icon" className="watermark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.35 72" aria-hidden="true">
+              <title>usaa-symbol-laurel</title>
+              <path id="Laurel" fill="#ffffff" d="M31.16,49.51l2.26,7.7-7.19-3.56L24,45.95ZM26.58,62.1l6.68-4.44-7.8-1.89-6.68,4.44Zm-8-21.82-.5,8,5.54,5.81.5-8ZM15.5,56.34l7.8-1.88L16.62,50,8.82,51.9ZM15.44,33.1l-3.21,7.36,3.21,7.35,3.21-7.35ZM7.05,47.15,15,48l-4.76-6.46-8-.89ZM15,25.28,9.42,31.09l.51,8,5.54-5.81ZM2.26,35.62l7.19,3.57-2.26-7.7L0,27.92Zm14.9-17.85L10,21.34,7.71,29l7.19-3.57ZM1.7,23.14,7.24,29l.51-8L2.21,15.14ZM21.81,11.47l-8,.9L9.08,18.83l8-.9ZM5.44,11.23l3.22,7.36,3.22-7.35L8.66,3.88ZM15.63,3.49l-2.34,7.68,7.22-3.5L22.85,0Zm26.56,46-2.27,7.7,7.19-3.56,2.27-7.7Zm12.38,10.7-6.68-4.44-7.8,1.89,6.68,4.44ZM49.24,46.08l.5,8,5.54-5.81-.5-8ZM64.53,51.9,56.73,50l-6.68,4.44,7.8,1.88ZM54.69,40.45,57.9,47.8l3.21-7.35L57.91,33.1Zm16.36.24-8,.89L58.32,48l8-.89Zm-13.16-7.4,5.54,5.81.51-8L58.4,25.28Zm15.46-5.37-7.19,3.57-2.27,7.7,7.19-3.57Zm-14.9-2.45L65.64,29l-2.27-7.7-7.19-3.57ZM71.14,15.14,65.6,20.95l.51,8,5.54-5.82ZM56.3,17.93l8,.9-4.76-6.46-8-.9ZM64.69,3.88l-3.21,7.35,3.22,7.35,3.22-7.36ZM50.5,0l2.34,7.68,7.22,3.5L57.72,3.49ZM36.67,72,32,63.84l4.71-8.16,4.71,8.16Z" />
+            </svg>
+
+            <div className="content-container">
+              {/* Left Side - New to USAA (Desktop Only) */}
+              <div className="promo-section">
+                <h2 className="promo-title">New to USAA?</h2>
+                <p className="promo-text">
+                  Become a member by selecting "Join USAA"<br />
+                  — it's easy and only takes a few minutes.
+                </p>
+                <a href="#" className="btn-secondary">Join USAA</a>
+              </div>
+
+              {/* Right Side - Login Card and Page Content */}
+              {children}
+            </div>
+          </main>
+          <Footer />
+        </div>
+      </body>
+    </html>
+  );
+}
