@@ -1,0 +1,659 @@
+/* ============================================
+   Westpac One Online Banking Styles
+   Pixel-Perfect from reference design
+   Mobile-First Approach
+   ============================================ */
+
+/* ===== LOCAL FONTS ===== */
+@font-face {
+    font-family: 'National 2';
+    src: url('/fonts/national-2-web-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'National 2';
+    src: url('/fonts/national-2-web-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/tiempos-text-web-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Material Symbols Rounded';
+    src: url('/fonts/material-symbols-rounded.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== CSS VARIABLES - Westpac Design Tokens ===== */
+:root {
+    /* Colors - Exact values from live site */
+    --westpac-red: #D5002B;
+    --button-plum: #541e4b;
+    --button-plum-hover: #3d1637;
+    --text-primary: #222222;
+    --text-secondary: #757575;
+    --text-grey: #666666;
+    --input-border: #757575;
+    --input-focus: #297ef3;
+    --info-banner-bg: #EFF3FA;
+    --info-banner-border: #346ABA;
+    --info-link: #0074c4;
+    --white: #ffffff;
+    --divider: #e0e0e0;
+
+    /* Typography - Local fonts */
+    --font-body: "National 2", system-ui, sans-serif;
+    --font-heading: "Tiempos Text", "Times New Roman", serif;
+    --font-icons: "Material Symbols Rounded";
+
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Border Radius */
+    --radius-input: 4px;
+    --radius-button: 1000px;
+
+    /* Sizes */
+    --input-height: 48px;
+    --button-height: 48px;
+    --max-form-width: 350px;
+}
+
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Body - Simple white background */
+body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.5;
+    background-color: #ffffff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#__next {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page wrapper with background SVG */
+.page-wrapper {
+    min-height: 100vh;
+    background-image: url('/brands/westpac/bg-left-mobile.svg');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: auto 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== INFO BANNER - Matches live site exactly ===== */
+.info-banner {
+    background-color: var(--info-banner-bg);
+    border: 1px solid var(--info-banner-border);
+    border-radius: 0;
+    padding: var(--spacing-md);
+    font-size: 16px;
+    line-height: 1.5;
+    box-shadow: 0px 8px 16px 0px rgba(34, 34, 34, 0.16);
+}
+
+.info-banner__content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.info-banner__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--info-banner-border);
+}
+
+.info-banner__text {
+    color: var(--text-primary);
+}
+
+.info-banner__link {
+    color: var(--button-plum);
+    text-decoration: underline;
+}
+
+.info-banner__link:hover {
+    text-decoration: none;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.main,
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    flex: 1;
+}
+
+/* ===== LOGO SECTION - Larger like reference ===== */
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Logo icon - Matches reference */
+.logo-section__icon {
+    width: 56px;
+    height: 48px;
+}
+
+/* "one" text - Uses Tiempos Text Bold */
+.logo-section__text {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: normal;
+}
+
+/* ===== LOGIN CARD - Transparent container ===== */
+.login-card {
+    width: 100%;
+    max-width: var(--max-form-width);
+    padding: 0;
+    background: transparent;
+}
+
+/* ===== LOGIN HEADING ===== */
+.login-heading,
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ===== FORM ===== */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* ===== FORM GROUP ===== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-group__label,
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group__input,
+.form-input {
+    height: var(--input-height);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 16px;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background: var(--white);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-input);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group__input:focus,
+.form-input:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 6px 0 rgba(41, 126, 243, 0.5);
+}
+
+.form-group__input::placeholder,
+.form-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.form-group__input:disabled,
+.form-input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+/* ===== LOGIN BUTTON - Centered, pill shape ===== */
+.login-button,
+.btn-signin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    height: var(--button-height);
+    width: auto;
+    min-width: 120px;
+    margin: var(--spacing-lg) auto 0;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font-body);
+    color: var(--white);
+    background-color: var(--button-plum);
+    border: none;
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.login-button:hover,
+.btn-signin:hover {
+    background-color: var(--button-plum-hover);
+}
+
+.login-button:focus,
+.btn-signin:focus {
+    outline: 2px solid var(--input-focus);
+    outline-offset: 2px;
+}
+
+.login-button:disabled,
+.btn-signin:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-button__icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== FORGOT PASSWORD ===== */
+.forgot-password {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+}
+
+.forgot-password__link,
+.forgot-link {
+    color: var(--button-plum);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.forgot-password__link:hover,
+.forgot-link:hover {
+    text-decoration: none;
+}
+
+/* ===== FOOTER - Matches reference exactly ===== */
+.footer {
+    padding: var(--spacing-lg) var(--spacing-md);
+    max-width: var(--max-form-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Divider line above footer */
+.footer__divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--divider) 0%, var(--button-plum) 50%, var(--divider) 100%);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Security Features Accordion */
+.footer__security {
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer__security-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: var(--spacing-sm) 0;
+}
+
+.footer__security-icon {
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+}
+
+.footer__security-toggle[aria-expanded="true"] .footer__security-icon {
+    transform: rotate(180deg);
+}
+
+/* Security Content (shown when expanded) */
+.footer__security-content {
+    padding-top: var(--spacing-md);
+}
+
+.footer__security-content.collapsed {
+    display: none;
+}
+
+/* Online Guardian - Centered */
+.footer__guardian {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) 0;
+}
+
+.footer__guardian-logo {
+    width: 48px;
+    height: 48px;
+}
+
+/* Legal Links - Stacked vertically, left-aligned */
+.footer__legal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+}
+
+.footer__legal-link {
+    color: var(--text-primary);
+    font-size: 16px;
+    text-decoration: none;
+    padding: var(--spacing-xs) 0;
+}
+
+.footer__legal-link:hover {
+    text-decoration: underline;
+}
+
+/* Copyright - With globe icon */
+.footer__copyright {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding-top: var(--spacing-md);
+}
+
+.footer__copyright-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   Error Message Styling
+   ============================================ */
+.error-message {
+    color: #b91c1c;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 12px 16px;
+    border-radius: var(--radius-input);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ============================================
+   Form Text Styles (consistent across pages)
+   ============================================ */
+.form-description {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.form-note {
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.form-footer {
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.form-link-button {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px;
+    background: none;
+    border: none;
+    color: var(--button-plum);
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+.form-link-button:hover {
+    text-decoration: none;
+}
+
+.form-link-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   KYC Checklist Styles
+   ============================================ */
+.kyc-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.kyc-checklist li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.kyc-checklist li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   Popup Blocked Fallback Styles
+   ============================================ */
+.popup-blocked-notice {
+    background-color: var(--info-banner-bg);
+    border: 1px solid var(--info-banner-border);
+    border-radius: var(--radius-input);
+    padding: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.popup-fallback-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--button-plum);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: var(--white);
+    border: 1px solid var(--button-plum);
+    border-radius: var(--radius-button);
+    transition: background-color 0.2s;
+}
+
+.popup-fallback-link:hover {
+    background-color: #f5f5f5;
+}
+
+/* ============================================
+   Status Page Styles (completed/terminated)
+   ============================================ */
+.status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.status-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px auto;
+    color: #16a34a;
+}
+
+.status-icon-wrapper svg {
+    width: 48px;
+    height: 48px;
+}
+
+.status-icon-wrapper.warning {
+    color: #d97706;
+}
+
+.status-message-primary {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.status-message-secondary {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.status-footer {
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-align: center;
+    margin-top: 32px;
+}
+
+/* ============================================
+   BotGuard Loading State
+   ============================================ */
+.botguard-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    background: transparent;
+}
+
+.botguard-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--divider);
+    border-top-color: var(--button-plum);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.botguard-text {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ===== RESPONSIVE - Tablet and up ===== */
+@media (min-width: 768px) {
+
+    .main,
+    .login-container {
+        padding: var(--spacing-xl) var(--spacing-lg);
+        padding-top: 60px;
+    }
+
+    .logo-section__icon {
+        width: 64px;
+        height: 56px;
+    }
+
+    .logo-section__text {
+        font-size: 42px;
+    }
+}
+
+/* ===== Utility class for hidden elements ===== */
+.hidden {
+    display: none !important;
+}
