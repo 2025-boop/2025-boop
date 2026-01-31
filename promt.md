@@ -56,8 +56,9 @@ Key Design Patterns:
 Use BotGuard wrapper on all pages
 In-line button loading (no full-page spinners)
 Consistent  trust badge if any on all pages
+create compnonosets as you see fit based on ur understading and study. the template sytling is just a stub.
 
-the reference design styles is here
+the reference design styles is hereC:\Users\Modmin\Downloads\user-client-main\reference
 basically you are simple styling 
 
 ultra think
