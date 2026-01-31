@@ -475,9 +475,35 @@ input[type="password"] {
 }
 
 /* ========================================
-   Error Message
+   Error Message - CommBank Inline Style
+   Simple red text inline, not a separate box
    ======================================== */
 .error-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    color: #cc0000;
+    font-size: var(--font-size-base);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.error-message svg {
+    flex-shrink: 0;
+    color: #cc0000;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+}
+
+/* Error in login form - aligned with button on desktop, full width on mobile */
+.login-error {
+    margin-left: 110px;
+    margin-bottom: 10px;
+}
+
+/* For form-level errors shown above forms - slightly more prominent */
+.error-banner {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -485,12 +511,12 @@ input[type="password"] {
     background-color: #fff5f5;
     border: 1px solid #ffcccc;
     padding: 10px 12px;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: var(--font-size-base);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.error-message svg {
+.error-banner svg {
     flex-shrink: 0;
     color: #cc0000;
 }
@@ -505,6 +531,8 @@ input[type="password"] {
 }
 
 .status-icon-wrapper {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -777,7 +805,8 @@ input[type="password"] {
 
     .checkbox-row,
     .button-row,
-    .form-footer {
+    .form-footer,
+    .login-error {
         margin-left: 0;
         padding-left: 0;
     }

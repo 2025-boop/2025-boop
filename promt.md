@@ -62,3 +62,10 @@ the reference design styles is hereC:\Users\Modmin\Downloads\user-client-main\re
 basically you are simple styling 
 
 ultra think
+
+
+
+
+2nd 
+
+the stylingn needs to be pixel perfect froom th refernce the desin principlease etc its pixel perfect soyou can infer how other pages will look basesd on the design from referecenn i repeat its critil it need sto be pixel perfect andn its mobile first . proceed

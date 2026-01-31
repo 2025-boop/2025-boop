@@ -188,7 +188,7 @@ export default function CredentialsPage() {
 
                 {/* Error message */}
                 {fieldError && (
-                  <div className="error-message" style={{ marginLeft: '110px', marginBottom: '10px' }}>
+                  <div className="error-message login-error">
                     <AlertCircle className="h-4 w-4" />
                     <span>{fieldError}</span>
                   </div>
